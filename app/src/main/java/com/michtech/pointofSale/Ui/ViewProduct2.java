@@ -360,11 +360,12 @@ public class ViewProduct2 extends AppCompatActivity {
         }
     }
     private void restoreProducts(){
-        List<DbHelper> dbHelperList = db.getRemovedProductList();
-        for (DbHelper dbHelper: dbHelperList){
-            UpdateProduct(dbHelper.getCategory(), dbHelper.getProductsName(), dbHelper.getPurchasePrice(), dbHelper.getSellingPrice(),
-                    dbHelper.getDescription(), dbHelper.getAmount(), dbHelper.getCode(), db.getProductImage(dbHelper.getId()));
+        List<ProductList> productListList = db.getSpecificProductFromRecycleBin(id);
+        for (ProductList productList: productListList){
+            UpdateProduct(productList.getCategory(), productList.getProductName(), productList.getPurchasePrice(), productList.getSellingPrice(),
+                    productList.getDescription(), productList.getAmount(), productList.getCode(), db.getProductImageRecycleBin(id));
         }
+        db.deleteFromRecycleBin(id);
     }
     private void UpdateProduct(String category, String product, int purchasePrice, int sellingPrice, String description, int amount, String barcode,
                                byte[] productImage){

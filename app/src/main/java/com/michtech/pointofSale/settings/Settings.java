@@ -23,8 +23,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.michtech.pointofSale.R;
 import com.michtech.pointofSale.database.DatabaseManager;
 
-import org.w3c.dom.Text;
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
@@ -62,8 +60,8 @@ public class Settings extends AppCompatActivity {
         Account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Settings.this, ViewAccount.class);
-                startActivity(intent);
+                //Intent intent = new Intent(Settings.this, ViewAccount.class);
+                //startActivity(intent);
             }
         });
 
@@ -91,8 +89,8 @@ public class Settings extends AppCompatActivity {
         View dialogView = LayoutInflater.from(Settings.this).inflate(R.layout.change_theme, viewGroup, false);
 
         RadioGroup themes = dialogView.findViewById(R.id.quality);
-        RadioButton Light = dialogView.findViewById(R.id.medium);
-        RadioButton Dark = dialogView.findViewById(R.id.low);
+        RadioButton Light = dialogView.findViewById(R.id.light);
+        RadioButton Dark = dialogView.findViewById(R.id.dark);
         RadioButton UseSystem = dialogView.findViewById(R.id.useSystem);
         TextView Cancel = dialogView.findViewById(R.id.cancel);
 
@@ -100,18 +98,33 @@ public class Settings extends AppCompatActivity {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
 
+        switch(getThemeSetting()){
+            case "Light":
+                Light.setChecked(true);
+                break;
+            case "Dark":
+                Dark.setChecked(true);
+                break;
+            case "System":
+                UseSystem.setChecked(true);
+                break;
+        }
+
         themes.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (i){
-                    case R.id.medium:
+                    case R.id.light:
+                        setThemeSetting("Light");
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                         break;
-                    case R.id.low:
+                    case R.id.dark:
+                        setThemeSetting("Dark");
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                         break;
                     case R.id.useSystem:
+                        setThemeSetting("System");
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
                         break;
                 }
@@ -176,5 +189,15 @@ public class Settings extends AppCompatActivity {
     private String getImageQuality(){
         SharedPreferences sharedPreferences = getSharedPreferences("ImageQuality", Context.MODE_PRIVATE);
         return sharedPreferences.getString("Quality", "");
+    }
+    private void setThemeSetting(String theme){
+        SharedPreferences sharedPreferences = getSharedPreferences("Theme", Context.MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Theme", theme);
+        editor.apply();
+    }
+    private String getThemeSetting(){
+        SharedPreferences sharedPreferences = getSharedPreferences("Theme", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("Theme", "");
     }
 }

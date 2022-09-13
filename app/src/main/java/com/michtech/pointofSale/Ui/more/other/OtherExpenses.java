@@ -44,9 +44,7 @@ public class OtherExpenses extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void run() {
-                showList();
-                adapterOtherExpense = new AdapterOtherExpense(OtherExpenses.this, pojoOtherExpenseList);
-                listView.setAdapter(adapterOtherExpense);
+                showData();
             }
         });
 
@@ -62,6 +60,15 @@ public class OtherExpenses extends AppCompatActivity {
     public void onStart(){
         super.onStart();
         TotalAmount.setText(Integer.toString(db.getOtherExpenseTotalAmount()));
+    }
+    public void onResume(){
+        super.onResume();
+        showData();
+    }
+    private void showData(){
+        showList();
+        adapterOtherExpense = new AdapterOtherExpense(OtherExpenses.this, pojoOtherExpenseList);
+        listView.setAdapter(adapterOtherExpense);
     }
     private void showList(){
         pojoOtherExpenseList = new ArrayList<>();

@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     style="@style/bodyBackground"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
@@ -15,9 +15,9 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/whiteCard"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            style="@style/whiteCard">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/visible"
@@ -36,15 +36,16 @@
 
             <ImageButton
                 android:id="@+id/storeMenu"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginEnd="16dp"
                 android:background="#00FF5722"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/menu"
-                app:tint="@color/orange" />
+                app:tint="@color/orange"
+                tools:ignore="SpeakableTextPresentCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -52,12 +53,12 @@
         android:id="@+id/listView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:divider="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search">
+        app:layout_constraintTop_toBottomOf="@+id/mergeNotification">
 
     </ListView>
 
@@ -68,10 +69,11 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
-        app:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/add" />
+        app:srcCompat="@drawable/add"
+        app:tint="@color/white"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <SearchView
         android:id="@+id/search"
@@ -93,10 +95,56 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/circle"
-        android:padding="5dp"
         android:elevation="5dp"
-        app:tint="@color/white"
+        android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView5"
-        app:srcCompat="@drawable/barcode" />
+        app:srcCompat="@drawable/barcode"
+        app:tint="@color/white" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mergeNotification"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/inside_notification"
+        app:layout_constraintBottom_toTopOf="@+id/listView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <TextView
+            android:id="@+id/textView18"
+            style="@style/blackText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/merge"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView62"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView62"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="View"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/textView18"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

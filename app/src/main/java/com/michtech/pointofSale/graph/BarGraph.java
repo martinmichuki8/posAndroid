@@ -1,5 +1,6 @@
 package com.michtech.pointofSale.graph;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -19,14 +20,18 @@ import com.anychart.enums.TooltipPositionMode;
 import com.michtech.pointofSale.R;
 import com.michtech.pointofSale.database.DatabaseManager;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class BarGraph extends AppCompatActivity {
     AnyChartView anyChartView;
     DatabaseManager db;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bar_graph);
 
@@ -61,6 +66,29 @@ public class BarGraph extends AppCompatActivity {
 
         anyChartView.setChart(cartesian);
 
+    }
+
+    private void getMonthlyData() {
+        Calendar calendar = Calendar.getInstance();
+        int lastDate = calendar.getActualMaximum(Calendar.DATE);
+    }
+
+    private void getWeekDates() {
+        // Get calendar set to current date and time
+        Calendar c = Calendar.getInstance();
+
+        // Set the calendar to monday of the current week
+        c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+
+        System.out.println();
+        // Print dates of the current week starting on Monday
+        @SuppressLint("SimpleDateFormat") DateFormat df = new SimpleDateFormat("EEE dd/MM/yyyy");
+        System.out.println(df.format(c.getTime()));
+        for (int i = -2; i < 6; i++) {
+            c.add(Calendar.DATE, -1);
+        }
+        System.out.println(df.format(c.getTime()));
+        System.out.println();
     }
     /*@NonNull
     private List<DataEntry> addList(){

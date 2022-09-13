@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    style="@style/whiteCard">
 
     <TextView
         android:id="@+id/textView6"
@@ -31,13 +32,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6">
 
         <RadioButton
-            android:id="@+id/medium"
+            android:id="@+id/light"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Light" />
 
         <RadioButton
-            android:id="@+id/low"
+            android:id="@+id/dark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Dark" />
@@ -58,6 +59,7 @@
         android:layout_marginBottom="32dp"
         android:padding="10dp"
         android:text="CANCEL"
+        android:textColor="@color/orange"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quality" />

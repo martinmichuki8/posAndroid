@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -35,11 +36,13 @@ import com.michtech.pointofSale.activityPortrait.CaptureActivityPortrait;
 import com.michtech.pointofSale.adapter.ProductsAdapter;
 import com.michtech.pointofSale.database.DatabaseManager;
 import com.michtech.pointofSale.database.DbHelper;
+import com.michtech.pointofSale.functions.Functions;
 import com.michtech.pointofSale.pojo.PojoProducts;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Store extends Fragment {
 
@@ -51,10 +54,12 @@ public class Store extends Fragment {
     ImageButton StoreMenu;
     SearchView Search;
     TextView Visible;
+    ConstraintLayout MergeNotification;
     private String ListType = "Products";
 
     List<String> categories = new ArrayList<>();
 
+    Functions functions;
     List<DbHelper> helperList;
     DatabaseManager db;
 
@@ -75,6 +80,11 @@ public class Store extends Fragment {
         StoreMenu = view.findViewById(R.id.storeMenu);
         Search = view.findViewById(R.id.search);
         Visible = view.findViewById(R.id.visible);
+        MergeNotification = view.findViewById(R.id.mergeNotification);
+
+        if(!functions.checkMerge()){
+            MergeNotification.setVisibility(View.INVISIBLE);
+        }
 
         db = new DatabaseManager(getContext());
 

@@ -79,6 +79,7 @@ public class AddOtherExpenses extends AppCompatActivity {
         types.add("Transport");
         types.add("Electricity");
         types.add("Food");
+        types.add("Water");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, types);
         Type.setAdapter(adapter);
@@ -96,6 +97,10 @@ public class AddOtherExpenses extends AppCompatActivity {
             case "Food":
             case "food":
                 ImageCode = 3;
+                break;
+            case "Water":
+            case "water":
+                ImageCode = 4;
                 break;
         }
     }

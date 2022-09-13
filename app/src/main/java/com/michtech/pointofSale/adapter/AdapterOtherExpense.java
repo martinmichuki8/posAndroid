@@ -95,6 +95,9 @@ public class AdapterOtherExpense extends BaseAdapter {
             case 3:
                 Image.setImageResource(R.drawable.ic_baseline_food_bank_24);
                 break;
+            case 4:
+                Image.setImageResource(R.drawable.water);
+                break;
             default:
                 Image.setImageResource(R.drawable.sell);
                 break;

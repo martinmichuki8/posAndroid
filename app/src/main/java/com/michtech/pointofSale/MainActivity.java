@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
@@ -34,8 +35,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
+        switch(getThemeSetting()){
+            case "Light":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+            case "Dark":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+            case "System":
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                break;
+        }
         CountDownTimer timer = new CountDownTimer(1000, 1000) {
             @Override
             public void onTick(long l) {
@@ -60,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
         }.start();
     }
 
+    private String getThemeSetting(){
+        SharedPreferences sharedPreferences = getSharedPreferences("Theme", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("Theme", "");
+    }
+
     private void StoreDatabase() {
         File DbFile = new File("data/data/com.michtech.pointofSale/databases/stores");//new File(this.getAssets()+"stores");
         if (DbFile.exists()) {
@@ -76,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 while ((length = is.read(buffer)) > 0) {
                     fos.write(buffer, 0, length);
                 }
-                System.out.println("File succesfully placed on sdcard");
+                System.out.println("File successfully placed on sdcard");
                 //Close the streams
                 fos.flush();
                 fos.close();
