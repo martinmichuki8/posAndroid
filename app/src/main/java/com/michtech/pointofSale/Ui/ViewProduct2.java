@@ -168,6 +168,10 @@ public class ViewProduct2 extends AppCompatActivity {
                             case R.id.expiry:
                                 setExpiryDateDialog();
                                 break;
+                            case R.id.restore:
+                                restoreProducts();
+                                finish();
+                                break;
                             case R.id.deleteComplete:
                                 db.deleteFromRecycleBin(id);
                                 finish();
@@ -354,5 +358,26 @@ public class ViewProduct2 extends AppCompatActivity {
                 ProductExpiryDate.setPadding(5, 0, 5, 0);
             }
         }
+    }
+    private void restoreProducts(){
+        List<DbHelper> dbHelperList = db.getRemovedProductList();
+        for (DbHelper dbHelper: dbHelperList){
+            UpdateProduct(dbHelper.getCategory(), dbHelper.getProductsName(), dbHelper.getPurchasePrice(), dbHelper.getSellingPrice(),
+                    dbHelper.getDescription(), dbHelper.getAmount(), dbHelper.getCode(), db.getProductImage(dbHelper.getId()));
+        }
+    }
+    private void UpdateProduct(String category, String product, int purchasePrice, int sellingPrice, String description, int amount, String barcode,
+                               byte[] productImage){
+        if(!db.checkCategory(category)){
+            db.AddCategory(category);
+        }
+        db.AddPrice(purchasePrice, sellingPrice);
+        db.AddProducts(product, description, amount, db.getCurrentCategoryId(category), db.getCurrentPriceId(purchasePrice, sellingPrice), barcode, getDate(), productImage);
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                db.saveToProductHistory(product, description, amount, category, purchasePrice, sellingPrice, barcode, "purchased", 0, productImage, getDate());
+            }
+        });
     }
 }
