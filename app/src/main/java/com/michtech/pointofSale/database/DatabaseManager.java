@@ -494,6 +494,18 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
         return productId;
     }
+    public List<Integer> getProductsId(String productName){
+        db = this.getReadableDatabase();
+        List<Integer> Ids = new ArrayList<>();
+        String query = "SELECT "+id+" FROM "+TableProducts+" WHERE "+ProductName+"='"+productName+"'";
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            do{
+                Ids.add(cursor.getInt(0));
+            }while(cursor.moveToNext());
+        }
+        return Ids;
+    }
     public int getProductsIdFromCode(String code){
         db = this.getReadableDatabase();
         int productId = 0;

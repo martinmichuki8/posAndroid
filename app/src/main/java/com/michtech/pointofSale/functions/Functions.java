@@ -14,6 +14,7 @@ public class Functions {
 
     private final Context context;
 
+    List<DuplicateProducts> duplicateProductsList;
     DatabaseManager db;
 
     public Functions(Context context){
@@ -49,6 +50,14 @@ public class Functions {
         return duplicates;
     }
     private void checkDuplicateData(List<String> duplicates){
-        //
+        duplicateProductsList = new ArrayList<>();
+    }
+    @NonNull
+    private DuplicateProducts addData(String productName){
+        DuplicateProducts duplicateProducts = new DuplicateProducts();
+        for(Integer productIds: db.getProductsId(productName)){
+            //
+        }
+        return duplicateProducts;
     }
 }
