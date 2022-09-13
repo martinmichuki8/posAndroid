@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.michtech.pointofSale">
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Pos">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Ui.DashBoard"
+            android:hardwareAccelerated="true">
+
+        </activity>
+        <activity android:name=".Ui.History"/>
+        <activity android:name=".Ui.ViewProduct"/>
+        <activity android:name=".Ui.more.store.AddProducts">
+            <meta-data android:name="android.app.shortcuts"
+                android:resource="@xml/shortcut" />
+        </activity>
+        <activity android:name=".Ui.more.employee.AddEmployee"/>
+        <activity android:name=".Ui.No.NoProductsFound"/>
+        <activity android:name=".settings.Settings"/>
+        <activity android:name=".Ui.No.NoEmployees"/>
+        <activity android:name=".Ui.more.employee.PayEmployee"/>
+        <activity android:name=".Ui.more.employee.PaymentDashboard"/>
+        <activity android:name=".Ui.more.employee.ViewSingleEmployee"/>
+        <activity android:name=".Ui.more.employee.ViewEmployee"/>
+        <activity android:name=".Ui.more.store.SellProducts"/>
+        <activity android:name=".Ui.ViewProduct2"/>
+        <activity android:name=".activityPortrait.CaptureActivityPortrait"
+            android:screenOrientation="fullSensor"/>
+        <activity android:name=".Ui.more.store.shopping.ShoppingData"
+            android:configChanges="orientation|screenSize">
+
+        </activity>
+        <service android:name=".background.ServiceSaveToHistory">
+
+        </service>
+        <service android:name=".background.Calculate">
+
+        </service>
+        <service android:name=".p2p.StartServer">
+
+        </service>
+        <activity android:name=".tcp.SendReceive"
+            android:configChanges="orientation|screenSize">
+
+        </activity>
+        <activity android:name=".Ui.more.other.OtherExpenses"
+            android:configChanges="orientation|screenSize">
+
+        </activity>
+        <activity android:name=".Ui.setup.SelectAccountType">
+
+        </activity>
+        <activity android:name=".Ui.setup.AccountDetails">
+
+        </activity>
+        <activity android:name=".Ui.setup.EmployeeAccount">
+
+        </activity>
+        <activity android:name=".Ui.more.other.AddOtherExpenses">
+
+        </activity>
+        <activity android:name=".Ui.setup.SetCurrency">
+
+        </activity>
+        <activity android:name=".graph.BarGraph">
+
+        </activity>
+        <activity android:name=".settings.ViewAccount"/>
+        <activity android:name=".Ui.more.devices.AddDevices"
+            android:configChanges="orientation|screenSize">
+
+        </activity>
+        <activity android:name=".Ui.more.employee.PaymentHistory"
+            android:configChanges="orientation|screenSize">
+
+        </activity>
+        <activity android:name=".Ui.more.employee.paymentHistory.EmployeePaymentHistory">
+
+        </activity>
+        <activity android:name=".Ui.more.devices.LinkedDevices"
+            android:configChanges="orientation|screenSize">
+
+        </activity>
+        <activity android:name=".Ui.more.devices.ConnectDevice"
+            android:configChanges="orientation|screenSize">
+
+        </activity>
+        <activity android:name=".graph.LineGraph">
+
+        </activity>
+    </application>
+
+</manifest>

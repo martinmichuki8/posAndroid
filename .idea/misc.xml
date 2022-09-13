@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/card_top.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/card_top_dark.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/circle.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/cream_background.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/fade_background.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/green_background.xml" value="0.2145" />
+        <entry key="app/src/main/res/drawable/grey_circle.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/home.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/ic_baseline_electrical_services_24.xml" value="0.206" />
+        <entry key="app/src/main/res/drawable/ic_baseline_emoji_transportation_24.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/ic_baseline_group_24.xml" value="0.206" />
+        <entry key="app/src/main/res/drawable/ic_baseline_store_24.xml" value="0.206" />
+        <entry key="app/src/main/res/drawable/input_background.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/input_background_dark.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/list_background.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/list_background_dark.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/more.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/more_background.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/more_background_dark.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/product_history_background.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/product_history_dark.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/rectangle_top.xml" value="0.197" />
+        <entry key="app/src/main/res/drawable/rectangle_top_dark.xml" value="0.197" />
+        <entry key="app/src/main/res/drawable/red_circle.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/sell.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/shape.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/store.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/view.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/white_circle.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/yellow_circle.xml" value="0.2225" />
+        <entry key="app/src/main/res/layout-land/view_employees.xml" value="0.2703125" />
+        <entry key="app/src/main/res/layout-v26/send_receive.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/account_detail.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.28541666666666665" />
+        <entry key="app/src/main/res/layout/adatper_dashboard.xml" value="0.28541666666666665" />
+        <entry key="app/src/main/res/layout/add_devices.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/add_employee.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/add_other_expenses.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/add_products.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/bar_graph.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/change_amount.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/layout/change_image_quality.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/change_theme.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/chnage_amount.xml" value="1.5875" />
+        <entry key="app/src/main/res/layout/choose_device_account.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/choose_employee.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/connect_dashboard.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/layout/connect_device.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/layout/connecting.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/layout/create_account_qrcode.xml" value="0.2640625" />
+        <entry key="app/src/main/res/layout/create_device_account.xml" value="0.28541666666666665" />
+        <entry key="app/src/main/res/layout/dashboard.xml" value="0.28541666666666665" />
+        <entry key="app/src/main/res/layout/dashboard_adapter.xml" value="1.5" />
+        <entry key="app/src/main/res/layout/dashboard_list.xml" value="0.28541666666666665" />
+        <entry key="app/src/main/res/layout/dashboard_list_date.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/data_table.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/date.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/device_list.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/layout/display_expense.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/employee_create_account.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/employee_dashboard.xml" value="0.2640625" />
+        <entry key="app/src/main/res/layout/employee_list.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/employee_pay_list.xml" value="0.28541666666666665" />
+        <entry key="app/src/main/res/layout/employee_payment_history.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/layout/employee_payment_history_list.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/layout/history.xml" value="0.28541666666666665" />
+        <entry key="app/src/main/res/layout/home.xml" value="0.28541666666666665" />
+        <entry key="app/src/main/res/layout/ip_dialog.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/line_graph.xml" value="0.26145833333333335" />
+        <entry key="app/src/main/res/layout/linked_devices.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/layout/more.xml" value="0.28541666666666665" />
+        <entry key="app/src/main/res/layout/more_list.xml" value="0.28541666666666665" />
+        <entry key="app/src/main/res/layout/no_products.xml" value="0.28541666666666665" />
+        <entry key="app/src/main/res/layout/other_expense_list.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/other_expenses.xml" value="0.28802083333333334" />
+        <entry key="app/src/main/res/layout/pay_employees.xml" value="0.28541666666666665" />
+        <entry key="app/src/main/res/layout/payment_dashboard.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/payment_history.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/payment_history_list.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/payment_history_list2.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/select_account_type.xml" value="0.2828125" />
+        <entry key="app/src/main/res/layout/sell_products.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/send_receive.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/set_currency.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/set_expiry_date.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/layout/settings.xml" value="0.28541666666666665" />
+        <entry key="app/src/main/res/layout/shopping_data.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/store.xml" value="0.28541666666666665" />
+        <entry key="app/src/main/res/layout/store_list.xml" value="0.28541666666666665" />
+        <entry key="app/src/main/res/layout/table_data.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/view_account.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/view_employee.xml" value="0.28541666666666665" />
+        <entry key="app/src/main/res/layout/view_employees.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/view_product.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/view_product2.xml" value="0.2713541666666667" />
+        <entry key="app/src/main/res/menu/history_menu.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/menu/payment_method_menu.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/menu/product_menu.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/menu/recycle_bin_menu.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/menu/store_menu.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2225" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2225" />
+        <entry key="app/src/main/res/xml/shortcut.xml" value="0.2828125" />
+      </map>
+    </option>
+  </component>
+  <component name="JavadocGenerationManager">
+    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Desktop/pos javadoc" />
+    <option name="OPTION_INCLUDE_LIBS" value="true" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Pos</string>
+    <string name="Add_Products">Add Products</string>
+    <string name="Account_Instruction">Using The admin account, navigate to the more tab and click add devices. Fill the details to generate the qr_code for the new user</string>
+</resources>

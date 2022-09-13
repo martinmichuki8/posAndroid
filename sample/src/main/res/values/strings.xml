@@ -1,0 +1,33 @@
+<!--
+  ~ Copyright (C) 2017 Scrounger
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~       http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="app_name">Country Currency Sample</string>
+
+    <string name="menu_country">Country Fragment</string>
+    <string name="menu_country_dialog">Country Dialog</string>
+    <string name="menu_country_currency">Country &amp; Currency Fragment</string>
+    <string name="menu_country_currency_dialog">Country &amp; Currency Dialog</string>
+
+    <string name="menu_currency">Currency Fragment</string>
+    <string name="menu_currency_dialog">Currency Dialog</string>
+    <string name="menu_currency_countries">Currency &amp; Countries Fragment</string>
+    <string name="menu_currency_countries_dialog">Currency &amp; Countries Dialog</string>
+
+    <string name="country_dialog_title">Select Country</string>
+    <string name="country_currency_dialog_title">Select Country &amp; Currency</string>
+    <string name="currency_dialog_title">Select Currency</string>
+    <string name="currency_countries_dialog_title">Select Currency &amp; Countries</string>
+</resources>

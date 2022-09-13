@@ -1,0 +1,60 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Pos" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryVariant">@color/blueDark3</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/orange</item>
+        <item name="colorSecondaryVariant">@color/yellow</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="dialog_animation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+    <style name="listBackground">
+        <item name="android:background">@drawable/list_background_dark</item>
+    </style>
+    <style name="historyBackground">
+        <item name="android:background">@drawable/product_history_dark</item>
+    </style>
+    <style name="whiteBodyBackground">
+        <item name="android:background">@color/blueDark</item>
+    </style>
+    <style name="moreBackground">
+        <item name="android:background">@drawable/more_background_dark</item>
+    </style>
+    <style name="sellBackground">
+        <item name="android:background">@drawable/more_background_dark</item>
+    </style>
+    <style name="bodyBackground">
+        <item name="android:background">@color/blueDark</item>
+    </style>
+    <style name="blackText">
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="CardTop">
+        <item name="android:background">@drawable/card_top_dark</item>
+    </style>
+    <style name="specialCard">
+        <item name="android:background">@color/blueDark2</item>
+    </style>
+    <style name="whiteCard">
+        <item name="android:background">@color/blueDark3</item>
+    </style>
+    <style name="whiteCard2">
+        <item name="android:background">@color/blueDark2</item>
+    </style>
+    <style name="input_background">
+        <item name="android:background">@drawable/input_background_dark</item>
+    </style>
+    <style name="rectangleTop">
+        <item name="android:background">@drawable/rectangle_top_dark</item>
+    </style>
+</resources>
