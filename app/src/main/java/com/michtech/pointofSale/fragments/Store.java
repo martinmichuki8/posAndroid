@@ -80,7 +80,7 @@ public class Store extends Fragment {
         Visible = view.findViewById(R.id.visible);
         MergeNotification = view.findViewById(R.id.mergeNotification);
 
-        functions  = new Functions();
+        functions  = new Functions(getContext());
 
         if(!functions.checkMerge()){
             MergeNotification.setVisibility(View.INVISIBLE);
