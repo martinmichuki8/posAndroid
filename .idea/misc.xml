@@ -63,6 +63,7 @@
         <entry key="app/src/main/res/layout/date.xml" value="0.2859375" />
         <entry key="app/src/main/res/layout/device_list.xml" value="0.26458333333333334" />
         <entry key="app/src/main/res/layout/display_expense.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/duplicate_list.xml" value="0.26458333333333334" />
         <entry key="app/src/main/res/layout/duplicate_product_list.xml" value="0.26458333333333334" />
         <entry key="app/src/main/res/layout/employee_create_account.xml" value="0.2859375" />
         <entry key="app/src/main/res/layout/employee_dashboard.xml" value="0.2640625" />
