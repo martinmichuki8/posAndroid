@@ -25,6 +25,9 @@ public class Functions {
 
     public boolean checkMerge(){
         boolean found = false;
+        for(String productName: duplicates()){
+            compareProductsData(productName);
+        }
         if(ProductIds.size()>0){
             found = true;
         }
@@ -51,14 +54,16 @@ public class Functions {
         }
         return duplicates;
     }
-    private void checkDuplicateData(List<String> duplicates){
-        duplicateProductsList = new ArrayList<>();
-    }
     private void compareProductsData(String productName){
         boolean found = false;
         for(Integer productIds: db.getProductsId(productName)){
             for(Integer productId: db.getProductsId(productName)){
-                //
+                if(productId!=productIds){
+                    if(compareProductsData(productId, productIds)){
+                        ProductIds.add(productId);
+                        ProductIds.add(productIds);
+                    }
+                }
             }
         }
     }
@@ -73,7 +78,11 @@ public class Functions {
                         productList.getDescription().equals(productList2.getDescription()) &&
                 productList.getPurchasePrice()==productList2.getPurchasePrice() && productList.getSellingPrice()==productList2.getSellingPrice()){
 
-                    match = true;
+                    if(!db.getExpiryDate(id).isEmpty() && !db.getExpiryDate(id2).isEmpty()){
+                        if(db.getExpiryDate(id).equals(db.getExpiryDate(id2))){
+                            match = true;
+                        }
+                    }
                 }
             }
         }

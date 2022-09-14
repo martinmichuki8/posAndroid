@@ -34,6 +34,7 @@ import com.michtech.pointofSale.activityPortrait.CaptureActivityPortrait;
 import com.michtech.pointofSale.adapter.ProductsAdapter;
 import com.michtech.pointofSale.database.DatabaseManager;
 import com.michtech.pointofSale.database.DbHelper;
+import com.michtech.pointofSale.duplicates.DuplicateProductsList;
 import com.michtech.pointofSale.functions.Functions;
 import com.michtech.pointofSale.pojo.PojoProducts;
 
@@ -80,11 +81,6 @@ public class Store extends Fragment {
         Visible = view.findViewById(R.id.visible);
         MergeNotification = view.findViewById(R.id.mergeNotification);
 
-        functions  = new Functions(getContext());
-
-        if(!functions.checkMerge()){
-            MergeNotification.setVisibility(View.INVISIBLE);
-        }
 
         db = new DatabaseManager(getContext());
 
@@ -92,6 +88,14 @@ public class Store extends Fragment {
             @Override
             public void run() {
                 showList();
+            }
+        });
+
+        MergeNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), DuplicateProductsList.class);
+                startActivity(intent);
             }
         });
 
@@ -181,6 +185,15 @@ public class Store extends Fragment {
             case "RecycleBin":
                 RecycleBin();
                 break;
+        }
+    }
+    public void onResume(){
+        super.onResume();
+        functions = new Functions(getContext());
+        if(functions.checkMerge()){
+            MergeNotification.setVisibility(View.VISIBLE);
+        }else{
+            MergeNotification.setVisibility(View.GONE);
         }
     }
     private void products(){

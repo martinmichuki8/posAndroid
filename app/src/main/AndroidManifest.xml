@@ -114,6 +114,10 @@
         <activity android:name=".graph.LineGraph">
 
         </activity>
+        <activity android:name=".duplicates.DuplicateProductsList"
+            android:launchMode = "singleTop">
+
+        </activity>
     </application>
 
 </manifest>

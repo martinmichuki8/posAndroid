@@ -107,6 +107,7 @@ public class ViewProduct2 extends AppCompatActivity {
 
         onDateSetListener = (datePicker, year1, month1, day1) -> {
             String date;
+            month1 =  month1+1;
             if(month1 <10){
                 date = year1 +"-0"+ month1 +"-"+ day1;
             }else{
