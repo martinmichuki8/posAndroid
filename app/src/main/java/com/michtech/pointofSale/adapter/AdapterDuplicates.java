@@ -65,8 +65,12 @@ public class AdapterDuplicates extends BaseAdapter {
 
         if(!condition){
             switch(args){
+                case "SelectAll":
+                    break;
                 case "Clear":
-                    Ids.clear();
+                    List<Integer> ids = new ArrayList<>();
+                    ids = Ids;
+                    Ids.removeAll(ids);
                     break;
             }
         }
