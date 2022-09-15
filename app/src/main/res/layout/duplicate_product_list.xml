@@ -32,7 +32,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageButton4"
+                app:layout_constraintEnd_toStartOf="@+id/duplicateMenu"
                 app:layout_constraintStart_toEndOf="@+id/relatedBack"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,7 +51,7 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton
-                android:id="@+id/imageButton4"
+                android:id="@+id/duplicateMenu"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="4dp"

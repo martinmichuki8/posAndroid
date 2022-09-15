@@ -1,10 +1,13 @@
 package com.michtech.pointofSale.duplicates;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DuplicateProductsList extends AppCompatActivity implements AdapterDuplicates.Listener{
-    ImageButton RelatedBack;
+    ImageButton RelatedBack, DuplicateMenu;
     Button Merge;
     ListView listView;
     List<Integer> Ids;
@@ -32,10 +35,9 @@ public class DuplicateProductsList extends AppCompatActivity implements AdapterD
         RelatedBack = findViewById(R.id.relatedBack);
         listView = findViewById(R.id.listView);
         Merge = findViewById(R.id.merege);
+        DuplicateMenu = findViewById(R.id.duplicateMenu);
 
-        showList();
-        adapterDuplicates = new AdapterDuplicates(DuplicateProductsList.this, duplicateProductsList);
-        listView.setAdapter(adapterDuplicates);
+        setData("New");
 
         RelatedBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +53,36 @@ public class DuplicateProductsList extends AppCompatActivity implements AdapterD
                 }
             }
         });
+        DuplicateMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(DuplicateProductsList.this, DuplicateMenu);
+                popupMenu.inflate(R.menu.duplicate_menu);
+                popupMenu.show();
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @SuppressLint("NonConstantResourceId")
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()){
+                            case R.id.merge:
+                                break;
+                            case R.id.selectAll:
+                                selectAll();
+                                break;
+                            case R.id.cancel:
+                                setData("Clear");
+                                break;
+                        }
+                        return false;
+                    }
+                });
+            }
+        });
+    }
+    private void setData(String args){
+        showList();
+        adapterDuplicates = new AdapterDuplicates(DuplicateProductsList.this, duplicateProductsList, args);
+        listView.setAdapter(adapterDuplicates);
     }
     private void showList(){
         duplicateProductsList = new ArrayList<>();
@@ -72,7 +104,9 @@ public class DuplicateProductsList extends AppCompatActivity implements AdapterD
         duplicateProductsList.add(new DuplicateProducts("Lemonade", "Drink", 20, 13, Ids));
         duplicateProductsList.add(new DuplicateProducts("Lemonade", "Drink", 20, 14, Ids));
     }
-
+    private void selectAll(){
+        //
+    }
     @Override
     public void onSomeEvent(int ID, @NonNull String action) {
         if(action.equals("Add")){
