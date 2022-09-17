@@ -87,6 +87,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String HistoryId = "HistoryId";
     private static final String TablePaymentMethodLink = "payment_method_link";
     private static final String PaymentMethodId = "PaymentMethodId";
+    private static final String TableProfits = "profits";
+    private static final String ProfitMade = "ProfitMade";
+    private static final String EstimatedProfit = "EstimatedProfit";
     Context context;
     public DatabaseManager(Context context) {
         super(context, DatabaseName, null, Version);
@@ -185,6 +188,11 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }catch (Exception e){
             createTablePaymentMethodLink();
         }
+        try{
+            cursor = db.query(TableProfits, null, null, null, null, null, null);
+        }catch (Exception e){
+            createTableProfits();
+        }
     }
     public String getDatabaseLocation(){
         db = this.getWritableDatabase();
@@ -221,6 +229,26 @@ public class DatabaseManager extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(Category, category);
         db.insert(TableCategory, null, values);
+    }
+    public int getProductCategoryId(int Id){
+        db = this.getReadableDatabase();
+        int categoryId = 0;
+        String query = "SELECT "+CategoryID+" FROM "+TableProducts+" WHERE "+id+"="+Id;
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            categoryId = cursor.getInt(0);
+        }
+        return categoryId;
+    }
+    public String getCategory(int Id){
+        db = this.getReadableDatabase();
+        String category = "";
+        String query = "SELECT "+Category+" FROM "+TableCategory+" WHERE "+id+"="+Id;
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            category = cursor.getString(0);
+        }
+        return category;
     }
     public int getCurrentCategoryId(String category){
         db = this.getReadableDatabase();
@@ -1676,6 +1704,13 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 PaymentMethodId+" INTEGER NOT NULL, "+
                 "CONSTRAINT History_column FOREIGN KEY("+HistoryId+") REFERENCES "+TablePaymentMethodLink+"("+id+"), "+
                 "CONSTRAINT PaymentMethod_column FOREIGN KEY("+PaymentMethodId+") REFERENCES "+TablePaymentMethodLink+"("+id+"));";
+        db.execSQL(query);
+    }
+    private void createTableProfits(){
+        db = this.getReadableDatabase();
+        String query = "CREATE TABLE IF NOT EXISTS "+TableProfits+"( "+id+" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "+
+                ProfitMade+" INTEGER NOT NULL, "+
+                EstimatedProfit+" INTEGER NOT NULL);";
         db.execSQL(query);
     }
 }

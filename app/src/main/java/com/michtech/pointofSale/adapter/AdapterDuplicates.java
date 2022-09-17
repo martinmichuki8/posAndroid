@@ -17,20 +17,20 @@ import java.util.List;
 
 public class AdapterDuplicates extends BaseAdapter {
 
-    static List<Integer> Ids = new ArrayList<>();
+    List<Integer> Ids = new ArrayList<>();
     Activity activity;
     List<DuplicateProducts> list;
-    String args;
-    boolean condition = false;
 
     public interface Listener{
         void onSomeEvent(int a, String action);
     }
 
-    public AdapterDuplicates(Activity activity, List<DuplicateProducts> list, String args){
+    public AdapterDuplicates(Activity activity, List<DuplicateProducts> list){
         this.activity = activity;
         this.list = list;
-        this.args = args;
+        if(Ids.size()>0){
+            sendData();
+        }
     }
 
     @Override
@@ -63,18 +63,6 @@ public class AdapterDuplicates extends BaseAdapter {
         Category.setText(list.get(position).getCategory());
         Amount.setText(Integer.toString(list.get(position).getAmount()));
 
-        if(!condition){
-            switch(args){
-                case "SelectAll":
-                    break;
-                case "Clear":
-                    List<Integer> ids = new ArrayList<>();
-                    ids = Ids;
-                    Ids.removeAll(ids);
-                    break;
-            }
-        }
-
         if(searchId(list.get(position).getId())) {
             Selected.setVisibility(View.INVISIBLE);
         }else{
@@ -97,6 +85,11 @@ public class AdapterDuplicates extends BaseAdapter {
         });
 
         return view;
+    }
+    private void sendData(){
+        for(Integer ids: Ids){
+            ((Listener) activity).onSomeEvent(ids, "Add");
+        }
     }
     private boolean searchId(int ID){
         int index = Ids.indexOf(ID);

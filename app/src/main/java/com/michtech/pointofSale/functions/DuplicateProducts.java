@@ -25,7 +25,7 @@ public class DuplicateProducts {
     public String getProductName(){
         return ProductName;
     }
-    public void setProductName(String productName){
+    public void setProductName(String ProductName){
         this.ProductName = ProductName;
     }
     public int getId(){

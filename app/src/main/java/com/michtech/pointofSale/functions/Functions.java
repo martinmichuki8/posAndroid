@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import com.michtech.pointofSale.database.DatabaseManager;
+import com.michtech.pointofSale.duplicates.DuplicateProductsList;
 import com.michtech.pointofSale.list.ProductList;
 
 import java.util.ArrayList;
@@ -26,12 +27,19 @@ public class Functions {
     public boolean checkMerge(){
         boolean found = false;
         for(String productName: duplicates()){
-            compareProductsData(productName);
+            compareProductsData(productName, false);
         }
         if(ProductIds.size()>0){
             found = true;
         }
         return found;
+    }
+    public List<DuplicateProducts> getDuplicates(){
+        duplicateProductsList = new ArrayList<>();
+        for(String productName: duplicates()){
+            compareProductsData(productName, true);
+        }
+        return duplicateProductsList;
     }
     @NonNull
     private List<String> duplicates(){
@@ -54,8 +62,10 @@ public class Functions {
         }
         return duplicates;
     }
-    private void compareProductsData(String productName){
-        boolean found = false;
+    private void compareProductsData(String productName, boolean ViewData){
+        if(ViewData){
+            ProductIds = new ArrayList<>();
+        }
         for(Integer productIds: db.getProductsId(productName)){
             for(Integer productId: db.getProductsId(productName)){
                 if(productId!=productIds){
@@ -65,6 +75,14 @@ public class Functions {
                     }
                 }
             }
+        }
+        if(ViewData){
+            DuplicateProducts duplicateProducts = new DuplicateProducts();
+
+            duplicateProducts.setIdList(ProductIds.stream().distinct().sorted().collect(Collectors.toList()));
+            duplicateProducts.setProductName(productName);
+
+            duplicateProductsList.add(duplicateProducts);
         }
     }
     private boolean compareProductsData(int id, int id2){
@@ -77,11 +95,13 @@ public class Functions {
                 productList.getCode().equals(productList2.getCode()) &&
                         productList.getDescription().equals(productList2.getDescription()) &&
                 productList.getPurchasePrice()==productList2.getPurchasePrice() && productList.getSellingPrice()==productList2.getSellingPrice()){
-
-                    if(!db.getExpiryDate(id).isEmpty() && !db.getExpiryDate(id2).isEmpty()){
+                    //match = true;
+                    if(db.searchExpiryExists(id) && db.searchExpiryExists(id2)){
                         if(db.getExpiryDate(id).equals(db.getExpiryDate(id2))){
                             match = true;
                         }
+                    }else{
+                        match = true;
                     }
                 }
             }

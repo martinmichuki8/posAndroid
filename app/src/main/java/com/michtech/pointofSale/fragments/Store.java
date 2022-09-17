@@ -104,7 +104,7 @@ public class Store extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), AddProducts.class);
                 intent.putExtra("TYPE", "no");
-                intent.putExtra("ID", "0");
+                intent.putExtra("ID", 0);
                 startActivity(intent);
             }
         });
