@@ -59,7 +59,8 @@ public class DuplicateProductsList extends AppCompatActivity implements AdapterD
                     Snackbar.make(view, "Nothing selected", Snackbar.LENGTH_LONG).setAction(null, null).show();
                 }else{
                     mergeData();
-                    finish();
+                    //finish();
+                    recreate();
                 }
             }
         });
@@ -90,16 +91,17 @@ public class DuplicateProductsList extends AppCompatActivity implements AdapterD
     public void onSomeEvent(int ID, @NonNull String action) {
         if(action.equals("Add")){
             SelectedIds.add(ID);
+            System.out.println("Selected: "+ID);
         }else{
             SelectedIds.remove(Integer.valueOf(ID));
         }
     }
     private void mergeData(){
+        duplicateProductsList = new ArrayList<>();
         for(DuplicateProducts duplicateProducts: functions.getDuplicates()){
             int amount = 0;
-
             for(Integer ids: SelectedIds){
-                if(duplicateProducts.getId()==ids){
+                if(duplicateProducts.getIdList().get(0)==ids){
                     for(Integer id: duplicateProducts.getIdList()){
                         amount += db.getProductAmount(id);
                     }

@@ -1,7 +1,10 @@
 package com.michtech.pointofSale.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -13,9 +16,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.michtech.pointofSale.R;
 import com.michtech.pointofSale.Ui.History;
@@ -36,6 +41,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -44,6 +50,7 @@ public class Home extends Fragment {
     ImageButton AddSale, AddPurchase;
     ListView  listView;
     TextView viewAll, TotalSales, TotalPurchases;
+    TextView Profit, EstimatedProfit;
     List<PojoHistory> list;
     HistoryAdapter historyAdapter;
     ImageView SalesGraph;
@@ -63,6 +70,8 @@ public class Home extends Fragment {
         AddPurchase = view.findViewById(R.id.addProduct);
         AddSale = view.findViewById(R.id.sellProducts);
         SalesGraph = view.findViewById(R.id.salesGraph);
+        Profit = view.findViewById(R.id.profit);
+        EstimatedProfit = view.findViewById(R.id.estimatedProfit);
 
         new Handler().post(new Runnable() {
             @Override
@@ -118,11 +127,13 @@ public class Home extends Fragment {
     }
     public void onStart() {
         super.onStart();
-        getContext().startService(new Intent(getContext(), Calculate.class));
+        setProfits();
         setImage();
     }
     public void onResume(){
         super.onResume();
+        requireContext().startService(new Intent(getContext(), Calculate.class));
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(dataReceived, new IntentFilter("Profits"));
         new Handler().post(new Runnable() {
             @Override
             public void run() {
@@ -130,6 +141,20 @@ public class Home extends Fragment {
                 setTotalPurchases();
             }
         });
+    }
+    private final BroadcastReceiver dataReceived = new BroadcastReceiver() {
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void onReceive(Context context, @NonNull Intent intent) {
+            int profit = intent.getIntExtra("Profit", 0);
+            int estimatedProfit = intent.getIntExtra("EstimatedProfit", 0);
+            Profit.setText(addComma(profit));
+            EstimatedProfit.setText(addComma(estimatedProfit));
+        }
+    };
+    public void onPause(){
+        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(dataReceived);
+        super.onPause();
     }
     private void setImage(){
         InputStream inputStream = new ByteArrayInputStream(db.getStoreImage());
@@ -168,6 +193,12 @@ public class Home extends Fragment {
         } else {
             TotalPurchases.setText(addComma(db.getTotalPurchases()));
         }
+    }
+    @SuppressLint("SetTextI18n")
+    private void setProfits(){
+        int[] data = db.getProfits();
+        Profit.setText(Integer.toString(data[0]));
+        EstimatedProfit.setText(Integer.toString(data[1]));
     }
     @NonNull
     private String addComma(int price){

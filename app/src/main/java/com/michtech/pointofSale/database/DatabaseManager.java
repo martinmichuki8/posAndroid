@@ -567,6 +567,44 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return productId;
     }
     /*
+    Profits
+     */
+    public boolean checkTableProfits(){
+        db = this.getReadableDatabase();
+        boolean found = false;
+        String query = "SELECT COUNT(id) FROM "+TableProfits;
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            if(cursor.getInt(0)>0){
+                found = true;
+            }
+        }
+        return found;
+    }
+    public void addTableProfits(int profit, int estimatedProfit, boolean update){
+        db = this.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(ProfitMade, profit);
+        values.put(EstimatedProfit, estimatedProfit);
+
+        if(update){
+            db.update(TableProfits, values, id+"=1", null);
+        }else{
+            db.insert(TableProfits, null, values);
+        }
+    }
+    public int[] getProfits(){
+        db = this.getReadableDatabase();
+        int[] profits = new int[]{0,0,0};
+        String query = "SELECT "+ProfitMade+", "+EstimatedProfit+" FROM "+TableProfits;
+        Cursor cursor =  db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            profits[0] = cursor.getInt(0);
+            profits[1] = cursor.getInt(1);
+        }
+        return profits;
+    }
+    /*
     Removed products
      */
     public int getRecycleBinCount(){
@@ -791,6 +829,29 @@ public class DatabaseManager extends SQLiteOpenHelper {
             dbHelper.setDDate(cursor.getString(10));
 
             dbHelperList.add(dbHelper);
+        }
+        return dbHelperList;
+    }
+    public List<DbHelper> getProfitsData(boolean sold){
+        db = this.getReadableDatabase();
+        List<DbHelper> dbHelperList = new ArrayList<>();
+        String query;
+        if(sold){
+            query = "SELECT "+Amount+", "+PurchasePrice+", "+SellingPrice+" FROM "+TableHistoryProducts+" WHERE "+PurchaseOrSold+"='sold'";
+        }else {
+            query = "SELECT "+Amount+", "+PurchasePrice+", "+SellingPrice+" FROM "+TableHistoryProducts+" WHERE "+PurchaseOrSold+"='purchased'";
+        }
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            do{
+                DbHelper dbHelper = new DbHelper();
+
+                dbHelper.setAmount(cursor.getInt(0));
+                dbHelper.setPurchasePrice(cursor.getInt(1));
+                dbHelper.setSellingPrice(cursor.getInt(2));
+
+                dbHelperList.add(dbHelper);
+            }while(cursor.moveToNext());
         }
         return dbHelperList;
     }
@@ -1708,7 +1769,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     }
     private void createTableProfits(){
         db = this.getReadableDatabase();
-        String query = "CREATE TABLE IF NOT EXISTS "+TableProfits+"( "+id+" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "+
+        String query = "CREATE TABLE IF NOT EXISTS "+TableProfits+"( "+id+" INTEGER NOT NULL, "+
                 ProfitMade+" INTEGER NOT NULL, "+
                 EstimatedProfit+" INTEGER NOT NULL);";
         db.execSQL(query);

@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import androidx.annotation.Nullable;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.michtech.pointofSale.database.DatabaseManager;
+import com.michtech.pointofSale.database.DbHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,9 @@ public class Calculate extends Service {
         calculateTotalSales();
         calculateTotalPurchases();
         stopService(intent);
+
+        sendProfits();
+
         return START_NOT_STICKY;
     }
     @Nullable
@@ -40,5 +45,21 @@ public class Calculate extends Service {
             price+=calculateData.getAmount()*calculateData.getPurchasePerItem();
         }
         db.updateTotalPurchases(price);
+    }
+    private void sendProfits(){
+        Intent intent = new Intent("Profits");
+        intent.putExtra("Profit", getEstimatedProfit(true));
+        intent.putExtra("EstimatedProfit", getEstimatedProfit(false));
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+    private int getEstimatedProfit(boolean sold){
+        int estimatedProfit = 0;
+        for(DbHelper dbHelper: db.getProfitsData(sold)){
+            estimatedProfit += (dbHelper.getAmount()*dbHelper.getSellingPrice())-(dbHelper.getAmount()*dbHelper.getPurchasePrice());
+        }
+        return estimatedProfit;
+    }
+    private int getProfit(int buyingPrice, int sellingPrice){
+        return (sellingPrice-buyingPrice);
     }
 }
