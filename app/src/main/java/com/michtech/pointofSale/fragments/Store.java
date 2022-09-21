@@ -189,7 +189,7 @@ public class Store extends Fragment {
     }
     public void onResume(){
         super.onResume();
-        functions = new Functions(getContext());
+        functions = new Functions(getActivity());
         if(functions.checkMerge()){
             MergeNotification.setVisibility(View.VISIBLE);
         }else{

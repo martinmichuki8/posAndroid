@@ -1,27 +1,35 @@
 package com.michtech.pointofSale.functions;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Environment;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.michtech.pointofSale.database.DatabaseManager;
 import com.michtech.pointofSale.duplicates.DuplicateProductsList;
 import com.michtech.pointofSale.list.ProductList;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Functions {
 
-    private final Context context;
+    private final String folder_main = "Pos";
+
+    private final Activity activity;
 
     List<Integer> ProductIds = new ArrayList<>();
     List<DuplicateProducts> duplicateProductsList;
     DatabaseManager db;
 
-    public Functions(Context context){
-        this.context = context;
+    public Functions(Activity activity){
+        this.activity = activity;
     }
 
     public boolean checkMerge(){
@@ -43,7 +51,7 @@ public class Functions {
     }
     @NonNull
     private List<String> duplicates(){
-        db = new DatabaseManager(context);
+        db = new DatabaseManager(activity);
         List<String> productsName, productsNameMerge, duplicates;
         duplicates = new ArrayList<>();
         productsName = db.getAllProductsName();
@@ -86,7 +94,7 @@ public class Functions {
         }
     }
     private boolean compareProductsData(int id, int id2){
-        db = new DatabaseManager(context);
+        db = new DatabaseManager(activity);
         boolean match = false;
         for(ProductList productList: db.getSpecificProducts(id)){
             for(ProductList productList2: db.getSpecificProducts(id2)){
@@ -96,7 +104,7 @@ public class Functions {
                         productList.getDescription().equals(productList2.getDescription()) &&
                 productList.getPurchasePrice()==productList2.getPurchasePrice() && productList.getSellingPrice()==productList2.getSellingPrice()){
                     //match = true;
-                    if(db.searchExpiryExists(id) && db.searchExpiryExists(id2)){
+                    if(db.searchExpiryExists(id) || db.searchExpiryExists(id2)){
                         if(db.getExpiryDate(id).equals(db.getExpiryDate(id2))){
                             match = true;
                         }
@@ -107,5 +115,16 @@ public class Functions {
             }
         }
         return match;
+    }
+    public void CreateDirectory(){
+        File file = new File(Environment.getExternalStorageDirectory(), folder_main);
+        if(!file.exists()){
+            file.mkdir();
+        }
+    }
+    public void checkPermission(String permission, int requestCode){
+        if (ContextCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
+        }
     }
 }

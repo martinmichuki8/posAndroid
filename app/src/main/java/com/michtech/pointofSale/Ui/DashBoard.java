@@ -1,19 +1,24 @@
 package com.michtech.pointofSale.Ui;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.michtech.pointofSale.MainActivity;
 import com.michtech.pointofSale.R;
 import com.michtech.pointofSale.adapter.DashboardAdapter;
 import com.michtech.pointofSale.database.DatabaseManager;
 import com.michtech.pointofSale.fragments.Store;
+import com.michtech.pointofSale.functions.Functions;
 
 import java.util.List;
 import java.util.Objects;
@@ -28,6 +33,8 @@ public class DashBoard extends AppCompatActivity implements Store.Listener{
             R.drawable.store,
             R.drawable.more
     };
+    Functions functions;
+    private  int STORAGE_PERMISSION_CODE = 1;
     private String ListType = "Products";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +51,10 @@ public class DashBoard extends AppCompatActivity implements Store.Listener{
         viewPager.setAdapter(dashboardAdapter);
         tabLayout.setupWithViewPager(viewPager);
         setTabIcons();
+
+        functions = new Functions(DashBoard.this);
+
+        checkPermission();
     }
     private void setTabIcons() {
         Objects.requireNonNull(tabLayout.getTabAt(0)).setIcon(tabIcons[0]);
@@ -87,5 +98,30 @@ public class DashBoard extends AppCompatActivity implements Store.Listener{
     @Override
     public void onSomeEvent(String s) {
         ListType = s;
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(DashBoard.this, "Storage Permission Granted", Toast.LENGTH_SHORT).show();
+                CreateExternalFolder();
+            }
+            else {
+                Toast.makeText(DashBoard.this, "Storage Permission Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    private void CreateExternalFolder(){
+        functions = new Functions(DashBoard.this);
+        functions.CreateDirectory();
+    }
+    private void checkPermission(){
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+            CreateExternalFolder();
+        }else{
+            functions.checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, 1);
+        }
     }
 }
