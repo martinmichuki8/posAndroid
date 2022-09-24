@@ -47,9 +47,9 @@ public class More extends Fragment {
                 adapterMore = new AdapterMore(getContext(), list);
                 otherGrid.setAdapter(adapterMore);
 
-                devices();
-                adapterMore = new AdapterMore(getContext(), list);
-                deviceGrid.setAdapter(adapterMore);
+                //devices();
+                //adapterMore = new AdapterMore(getContext(), list);
+                //deviceGrid.setAdapter(adapterMore);
             }
         });
 

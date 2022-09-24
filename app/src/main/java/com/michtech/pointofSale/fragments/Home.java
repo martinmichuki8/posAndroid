@@ -19,11 +19,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.michtech.pointofSale.R;
 import com.michtech.pointofSale.Ui.History;
+import com.michtech.pointofSale.Ui.dashboard.ProfitsMade;
 import com.michtech.pointofSale.Ui.more.store.AddProducts;
 import com.michtech.pointofSale.Ui.more.store.SellProducts;
 import com.michtech.pointofSale.adapter.HistoryAdapter;
@@ -54,6 +56,7 @@ public class Home extends Fragment {
     List<PojoHistory> list;
     HistoryAdapter historyAdapter;
     ImageView SalesGraph;
+    ConstraintLayout Profits, EstimatedProfits;
 
     List<DbHelper> dbHelperList;
     DatabaseManager db;
@@ -72,6 +75,8 @@ public class Home extends Fragment {
         SalesGraph = view.findViewById(R.id.salesGraph);
         Profit = view.findViewById(R.id.profit);
         EstimatedProfit = view.findViewById(R.id.estimatedProfit);
+        Profits = view.findViewById(R.id.profits);
+        EstimatedProfits = view.findViewById(R.id.estimatedProfits);
 
         new Handler().post(new Runnable() {
             @Override
@@ -122,7 +127,20 @@ public class Home extends Fragment {
                 startActivity(intent);
             }
         });
-
+        Profits.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ProfitsMade.class);
+                startActivity(intent);
+            }
+        });
+        EstimatedProfits.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ProfitsMade.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
     public void onStart() {

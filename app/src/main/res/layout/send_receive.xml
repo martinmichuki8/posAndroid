@@ -65,7 +65,7 @@
         android:indeterminate="false"
         android:progressDrawable="@drawable/progress"
         android:max="100"
-        android:progress="0"
+        android:progress="10"
         app:layout_constraintBottom_toTopOf="@+id/receive"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -118,6 +118,9 @@
             android:launchMode = "singleTop">
 
         </activity>
+        <activity android:name=".Ui.dashboard.ProfitsMade"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop"/>
     </application>
 
 </manifest>
