@@ -43,6 +43,7 @@ public class Login extends AppCompatActivity {
                     if(Password.getEditText().getText().toString().equals(db.getAccountPassword())){
                         Intent intent = new Intent(Login.this, DashBoard.class);
                         startActivity(intent);
+                        finish();
                     }else{
                         Snackbar.make(view, "Password does not match", Snackbar.LENGTH_LONG).setAction(null, null).show();
                     }

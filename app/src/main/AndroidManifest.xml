@@ -124,6 +124,9 @@
         <activity android:name=".Ui.Login.Login"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTop"/>
+        <activity android:name=".settings.SecurityQuestion"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"/>
     </application>
 
 </manifest>

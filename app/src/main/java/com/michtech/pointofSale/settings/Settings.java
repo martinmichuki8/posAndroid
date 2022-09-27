@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +33,7 @@ public class Settings extends AppCompatActivity {
     CircleImageView StoreImage;
     TextView StoreName, UserName, ChangeTheme, ImageQuality;
     ConstraintLayout Account;
+    Switch Authentication;
     DatabaseManager db;
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -46,6 +48,7 @@ public class Settings extends AppCompatActivity {
         ChangeTheme = findViewById(R.id.changeTheme);
         ImageQuality = findViewById(R.id.imageQuality);
         Account = findViewById(R.id.viewAccount);
+        Authentication = findViewById(R.id.authentication);
 
         StoreName.setText(db.getStoreName());
         UserName.setText(db.getUser());
@@ -77,6 +80,25 @@ public class Settings extends AppCompatActivity {
                 setDialogImageQuality();
             }
         });
+        Authentication.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(Authentication.isChecked()){
+                    Intent intent = new Intent(Settings.this, SecurityQuestion.class);
+                    startActivity(intent);
+                }else{
+                    setAuthentication("notAuthenticate");
+                }
+            }
+        });
+    }
+    public void onStart(){
+        super.onStart();
+        if(checkAuthentication()){
+            Authentication.setChecked(true);
+        }else{
+            Authentication.setChecked(false);
+        }
     }
     private void setImage(){
         InputStream inputStream = new ByteArrayInputStream(db.getStoreImage());
@@ -199,5 +221,15 @@ public class Settings extends AppCompatActivity {
     private String getThemeSetting(){
         SharedPreferences sharedPreferences = getSharedPreferences("Theme", Context.MODE_PRIVATE);
         return sharedPreferences.getString("Theme", "");
+    }
+    private void setAuthentication(String authenticate){
+        SharedPreferences sharedPreferences = getSharedPreferences("PosSettings", Context.MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Authentication", authenticate);
+        editor.apply();
+    }
+    private boolean checkAuthentication(){
+        SharedPreferences sharedPreferences = getSharedPreferences("PosSettings", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("Authentication", "").equals("Authenticate");
     }
 }

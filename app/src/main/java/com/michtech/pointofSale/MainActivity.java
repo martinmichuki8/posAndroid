@@ -61,7 +61,11 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = null;
                 if (db.checkTableStore() && db.checkTableUser()) {
-                    intent = new Intent(MainActivity.this, Login.class);
+                    if(checkAuthentication()){
+                        intent = new Intent(MainActivity.this, Login.class);
+                    }else{
+                        intent = new Intent(MainActivity.this, DashBoard.class);
+                    }
                 } else {
                     intent = new Intent(MainActivity.this, SelectAccountType.class);
                 }
@@ -75,6 +79,10 @@ public class MainActivity extends AppCompatActivity {
     private String getThemeSetting(){
         SharedPreferences sharedPreferences = getSharedPreferences("Theme", Context.MODE_PRIVATE);
         return sharedPreferences.getString("Theme", "");
+    }
+    private boolean checkAuthentication(){
+        SharedPreferences sharedPreferences = getSharedPreferences("PosSettings", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("Authentication", "").equals("Authenticate");
     }
 
     private void StoreDatabase() {

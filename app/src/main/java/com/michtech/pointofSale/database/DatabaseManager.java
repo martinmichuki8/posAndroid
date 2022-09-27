@@ -90,6 +90,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String TableProfits = "profits";
     private static final String ProfitMade = "ProfitMade";
     private static final String EstimatedProfit = "EstimatedProfit";
+    private static final String SecurityQuestion = "SecurityQuestion";
+    private static final String SecurityQuestionTable = "security_question_table";
     Context context;
     public DatabaseManager(Context context) {
         super(context, DatabaseName, null, Version);
@@ -192,6 +194,11 @@ public class DatabaseManager extends SQLiteOpenHelper {
             cursor = db.query(TableProfits, null, null, null, null, null, null);
         }catch (Exception e){
             createTableProfits();
+        }
+        try{
+            cursor = db.query(SecurityQuestionTable, null, null, null, null, null, null);
+        }catch (Exception e){
+            createSecurityQuestionTable();
         }
     }
     public String getDatabaseLocation(){
@@ -1610,6 +1617,32 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return dbHelperList;
     }
     /*
+    Security question
+     */
+    private boolean checkSecurityQuestion(){
+        db = this.getReadableDatabase();
+        boolean found = false;
+        String query = "SELECT COUNT(id) FROM "+SecurityQuestionTable;
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            if(cursor.getInt(0)>0){
+                found = true;
+            }
+        }
+        return found;
+    }
+    public void saveSecurityQuestion(String answer){
+        db = this.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(SecurityQuestion, answer);
+        if(checkSecurityQuestion()){
+            db.update(SecurityQuestionTable, values, id+"="+1, null);
+        }else{
+            values.put(id, 1);
+            db.insert(SecurityQuestionTable, null, values);
+        }
+    }
+    /*
     Create tables
      */
     private void CreateTableStore(){
@@ -1782,6 +1815,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
         String query = "CREATE TABLE IF NOT EXISTS "+TableProfits+"( "+id+" INTEGER NOT NULL, "+
                 ProfitMade+" INTEGER NOT NULL, "+
                 EstimatedProfit+" INTEGER NOT NULL);";
+        db.execSQL(query);
+    }
+    private void createSecurityQuestionTable(){
+        db = this.getReadableDatabase();
+        String query = "CREATE TABLE IF NOT EXISTS "+SecurityQuestionTable+"( "+id+" INTEGER NOT NULL, "+
+                SecurityQuestion+" TEXT NOT NULL);";
         db.execSQL(query);
     }
 }
