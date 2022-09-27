@@ -1541,6 +1541,16 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
         return user;
     }
+    public String getAccountPassword(){
+        db = this.getReadableDatabase();
+        String query = "SELECT "+Password+" FROM "+TableUser;
+        String password = "";
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            password = cursor.getString(0);
+        }
+        return password;
+    }
     public String getStoreName(){
         db = this.getReadableDatabase();
         String storeName = "";

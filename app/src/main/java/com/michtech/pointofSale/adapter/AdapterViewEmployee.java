@@ -1,7 +1,9 @@
 package com.michtech.pointofSale.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +18,13 @@ import com.michtech.pointofSale.pojo.PojoViewEmployee;
 import java.util.List;
 
 public class AdapterViewEmployee extends BaseAdapter {
-    Context context;
+    Activity activity;
     List<PojoViewEmployee> list;
     DatabaseManager db;
-    public AdapterViewEmployee(Context context, List<PojoViewEmployee> list){
-        this.context = context;
+    public AdapterViewEmployee(Activity activity, List<PojoViewEmployee> list){
+        this.activity = activity;
         this.list = list;
-        db = new DatabaseManager(context);
+        db = new DatabaseManager(activity);
     }
     @Override
     public int getCount() {
@@ -42,13 +44,15 @@ public class AdapterViewEmployee extends BaseAdapter {
     @SuppressLint({"ViewHolder", "SetTextI18n"})
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        view = LayoutInflater.from(context).inflate(R.layout.employee_list, viewGroup, false);
+        view = LayoutInflater.from(activity).inflate(R.layout.employee_list, viewGroup, false);
 
         TextView Name = view.findViewById(R.id.description);
         TextView Phone = view.findViewById(R.id.name);
 
         Name.setText(list.get(position).getName());
         Phone.setText(list.get(position).getPhone());
+
+        activity.registerForContextMenu(view);
 
         return view;
     }

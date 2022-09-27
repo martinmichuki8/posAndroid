@@ -121,6 +121,9 @@
         <activity android:name=".Ui.dashboard.ProfitsMade"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTop"/>
+        <activity android:name=".Ui.Login.Login"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop"/>
     </application>
 
 </manifest>

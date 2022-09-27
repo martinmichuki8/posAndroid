@@ -2,6 +2,7 @@ package com.michtech.pointofSale.Ui.more.employee;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -58,5 +59,11 @@ public class ViewEmployee extends AppCompatActivity {
         for(DbHelper helper: dbHelpers){
             list.add(new PojoViewEmployee(helper.getId(), helper.getName(), helper.getEmail(), helper.getPhone()));
         }
+    }
+    @Override
+    public void onCreateContextMenu(ContextMenu contextMenu, View v, ContextMenu.ContextMenuInfo menuInfo){
+        super.onCreateContextMenu(contextMenu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.employee_menu, contextMenu);
+        System.out.println();
     }
 }

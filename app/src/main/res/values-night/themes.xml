@@ -57,4 +57,7 @@
     <style name="rectangleTop">
         <item name="android:background">@drawable/rectangle_top_dark</item>
     </style>
+    <style name="imageTint">
+        <item name="tint">@color/white</item>
+    </style>
 </resources>

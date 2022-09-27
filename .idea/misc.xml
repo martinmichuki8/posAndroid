@@ -25,6 +25,7 @@
         <entry key="app/src/main/res/drawable/more_background_dark.xml" value="0.2225" />
         <entry key="app/src/main/res/drawable/product_history_background.xml" value="0.2225" />
         <entry key="app/src/main/res/drawable/product_history_dark.xml" value="0.2225" />
+        <entry key="app/src/main/res/drawable/progress.xml" value="0.24" />
         <entry key="app/src/main/res/drawable/rectangle_top.xml" value="0.197" />
         <entry key="app/src/main/res/drawable/rectangle_top_dark.xml" value="0.197" />
         <entry key="app/src/main/res/drawable/red_circle.xml" value="0.2225" />
@@ -76,6 +77,7 @@
         <entry key="app/src/main/res/layout/ip_dialog.xml" value="0.2859375" />
         <entry key="app/src/main/res/layout/line_graph.xml" value="0.26145833333333335" />
         <entry key="app/src/main/res/layout/linked_devices.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/layout/login_page.xml" value="0.26145833333333335" />
         <entry key="app/src/main/res/layout/more.xml" value="0.28541666666666665" />
         <entry key="app/src/main/res/layout/more_list.xml" value="0.28541666666666665" />
         <entry key="app/src/main/res/layout/no_products.xml" value="0.28541666666666665" />
@@ -103,6 +105,7 @@
         <entry key="app/src/main/res/layout/view_product.xml" value="0.33" />
         <entry key="app/src/main/res/layout/view_product2.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/menu/duplicate_menu.xml" value="0.26458333333333334" />
+        <entry key="app/src/main/res/menu/employee_menu.xml" value="0.26145833333333335" />
         <entry key="app/src/main/res/menu/history_menu.xml" value="0.26458333333333334" />
         <entry key="app/src/main/res/menu/payment_method_menu.xml" value="0.26458333333333334" />
         <entry key="app/src/main/res/menu/product_menu.xml" value="0.26458333333333334" />

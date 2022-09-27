@@ -127,4 +127,23 @@ public class Functions {
             ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
         }
     }
+    @NonNull
+    public String addComma(int price){
+        String total = Integer.toString(price);
+        int size = total.length()+total.length()/3;
+        char t[] = new char[size+2];
+        int c=size+1;
+        int n=1;
+        for(int i=total.length()-1; i>-1; i--){
+            t[c] = total.charAt(i);
+            c--;
+            if(n%3==0 && n!=total.length()){
+                t[c] = ',';
+                c--;
+            }
+            n++;
+        }
+        total = String.valueOf(t);
+        return total;
+    }
 }

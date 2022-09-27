@@ -11,6 +11,7 @@ import android.os.CountDownTimer;
 import android.os.Environment;
 
 import com.michtech.pointofSale.Ui.DashBoard;
+import com.michtech.pointofSale.Ui.Login.Login;
 import com.michtech.pointofSale.Ui.setup.SelectAccountType;
 import com.michtech.pointofSale.database.DatabaseManager;
 
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = null;
                 if (db.checkTableStore() && db.checkTableUser()) {
-                    intent = new Intent(MainActivity.this, DashBoard.class);
+                    intent = new Intent(MainActivity.this, Login.class);
                 } else {
                     intent = new Intent(MainActivity.this, SelectAccountType.class);
                 }
