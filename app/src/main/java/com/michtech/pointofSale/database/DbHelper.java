@@ -30,11 +30,13 @@ public class DbHelper {
     private boolean setDate;
     private String startDate;
     private String endDate;
+    private String Quantity;
 
     public DbHelper(){}
     public DbHelper(int Id, String Name, String Email, String Phone, String Bank, String DDate, String Paid,
                     String Category, int PurchasePrice, int SellingPrice, String ProductName, String Description, int Amount, int CategoryId, int PriceId, String Code,
-                    int TotalPrice, int ProductId, String PurchaseOrSale, int ImageCode, String Type, Date date, boolean setDate, String startDate, String endDate){
+                    int TotalPrice, int ProductId, String PurchaseOrSale, int ImageCode, String Type, Date date, boolean setDate, String startDate, String endDate,
+                    String Quantity){
         this.Id = Id;
         this.Name = Name;
         this.Email = Email;
@@ -59,6 +61,7 @@ public class DbHelper {
         this.setDate = setDate;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.Quantity = Quantity;
     }
     public int getId(){
         return Id;
@@ -197,5 +200,11 @@ public class DbHelper {
     }
     public void setEndDate(String endDate){
         this.endDate = endDate;
+    }
+    public String getQuantity(){
+        return Quantity;
+    }
+    public void setQuantity(String Quantity){
+        this.Quantity = Quantity;
     }
 }

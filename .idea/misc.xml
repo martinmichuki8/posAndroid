@@ -88,6 +88,7 @@
         <entry key="app/src/main/res/layout/payment_history.xml" value="0.2859375" />
         <entry key="app/src/main/res/layout/payment_history_list.xml" value="0.2859375" />
         <entry key="app/src/main/res/layout/payment_history_list2.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/products_trend.xml" value="0.26145833333333335" />
         <entry key="app/src/main/res/layout/profits_made.xml" value="0.26145833333333335" />
         <entry key="app/src/main/res/layout/security_question.xml" value="0.26145833333333335" />
         <entry key="app/src/main/res/layout/select_account_type.xml" value="0.2828125" />
@@ -100,6 +101,7 @@
         <entry key="app/src/main/res/layout/store.xml" value="0.28541666666666665" />
         <entry key="app/src/main/res/layout/store_list.xml" value="0.28541666666666665" />
         <entry key="app/src/main/res/layout/table_data.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/trend_list.xml" value="0.26145833333333335" />
         <entry key="app/src/main/res/layout/view_account.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/view_employee.xml" value="0.28541666666666665" />
         <entry key="app/src/main/res/layout/view_employees.xml" value="0.25" />

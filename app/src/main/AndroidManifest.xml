@@ -127,6 +127,9 @@
         <activity android:name=".settings.SecurityQuestion"
             android:launchMode="singleTop"
             android:configChanges="orientation|screenSize"/>
+        <activity android:name=".Ui.more.store.ProductsTrend"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize"/>
     </application>
 
 </manifest>

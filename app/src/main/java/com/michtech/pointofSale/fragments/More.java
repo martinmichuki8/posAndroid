@@ -59,6 +59,7 @@ public class More extends Fragment {
         list = new ArrayList<>();
         list.add(new PojoMore(R.drawable.add, "Add products", "AddProducts"));
         list.add(new PojoMore(R.drawable.sell, "Sell products", "SellProducts"));
+        list.add(new PojoMore(R.drawable.ic_baseline_trending_up_24, "Trend", "trend"));
     }
     private void listEmployee(){
         list = new ArrayList<>();

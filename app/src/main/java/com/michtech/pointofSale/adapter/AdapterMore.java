@@ -21,6 +21,7 @@ import com.michtech.pointofSale.Ui.more.store.AddProducts;
 import com.michtech.pointofSale.Ui.No.NoEmployees;
 import com.michtech.pointofSale.Ui.No.NoProductsFound;
 import com.michtech.pointofSale.Ui.more.employee.PayEmployee;
+import com.michtech.pointofSale.Ui.more.store.ProductsTrend;
 import com.michtech.pointofSale.Ui.more.store.SellProducts;
 import com.michtech.pointofSale.database.DatabaseManager;
 import com.michtech.pointofSale.pojo.PojoMore;
@@ -79,6 +80,10 @@ public class AdapterMore extends BaseAdapter {
                         }else{
                             intent = new Intent(context, SellProducts.class);
                         }
+                        context.startActivity(intent);
+                        break;
+                    case "trend":
+                        intent = new Intent(context, ProductsTrend.class);
                         context.startActivity(intent);
                         break;
                     case "paymentHistory":

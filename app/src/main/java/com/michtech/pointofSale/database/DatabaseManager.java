@@ -92,6 +92,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
     private static final String EstimatedProfit = "EstimatedProfit";
     private static final String SecurityQuestion = "SecurityQuestion";
     private static final String SecurityQuestionTable = "security_question_table";
+    private static final String TimesBought = "TimesBought";
+    private static final String Quantity = "Quantity";
+    private static final String ProductsTrendView = "products_trend";
     Context context;
     public DatabaseManager(Context context) {
         super(context, DatabaseName, null, Version);
@@ -199,6 +202,11 @@ public class DatabaseManager extends SQLiteOpenHelper {
             cursor = db.query(SecurityQuestionTable, null, null, null, null, null, null);
         }catch (Exception e){
             createSecurityQuestionTable();
+        }
+        try{
+            cursor = db.query(ProductsTrendView, null, null, null, null, null, null);
+        }catch (Exception e){
+            createViewProductsTrend();
         }
     }
     public String getDatabaseLocation(){
@@ -1643,6 +1651,31 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
     }
     /*
+    Products trend
+     */
+    public List<String> getProductsNameFromTrend(){
+        db = this.getReadableDatabase();
+        List<String> products = new ArrayList<>();
+        String query = "SELECT "+ProductName+" FROM "+ProductsTrendView;
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            do{
+                products.add(cursor.getString(0));
+            }while(cursor.moveToNext());
+        }
+        return products;
+    }
+    public int getQuantityFromTrend(String productName){
+        db = this.getReadableDatabase();
+        int found = 0;
+        String query = "SELECT COUNT(id) FROM "+ProductsTrendView+" WHERE "+ProductName+"='"+productName+"'";
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            found = cursor.getInt(0);
+        }
+        return found;
+    }
+    /*
     Create tables
      */
     private void CreateTableStore(){
@@ -1821,6 +1854,15 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db = this.getReadableDatabase();
         String query = "CREATE TABLE IF NOT EXISTS "+SecurityQuestionTable+"( "+id+" INTEGER NOT NULL, "+
                 SecurityQuestion+" TEXT NOT NULL);";
+        db.execSQL(query);
+    }
+    private void createViewProductsTrend(){
+        db = this.getReadableDatabase();
+        String query = "CREATE VIEW IF NOT EXISTS "+ProductsTrendView+" AS SELECT "+
+                TableHistoryProducts+"."+id+", "+
+                TableHistoryProducts+"."+ProductName+", "+
+                TableHistoryProducts+"."+Amount+" AS "+Quantity+" FROM "+
+                TableHistoryProducts;
         db.execSQL(query);
     }
 }
