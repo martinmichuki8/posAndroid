@@ -2,6 +2,7 @@ package com.michtech.pointofSale.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.michtech.pointofSale.R;
+import com.michtech.pointofSale.Ui.more.store.trend.ProductTrend;
 import com.michtech.pointofSale.pojo.PojoTrend;
 
 import java.util.List;
@@ -47,6 +49,14 @@ public class AdapterTrend extends BaseAdapter {
 
         ProductName.setText(list.get(position).getProductName());
         Quantity.setText(Integer.toString(list.get(position).getQuantity()));
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ProductTrend.class);
+                context.startActivity(intent);
+            }
+        });
 
         return view;
     }

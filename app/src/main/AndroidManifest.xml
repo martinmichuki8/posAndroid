@@ -130,6 +130,9 @@
         <activity android:name=".Ui.more.store.ProductsTrend"
             android:launchMode="singleTop"
             android:configChanges="orientation|screenSize"/>
+        <activity android:name=".Ui.more.store.trend.ProductTrend"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop"/>
     </application>
 
 </manifest>

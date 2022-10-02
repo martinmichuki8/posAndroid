@@ -1862,7 +1862,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 TableHistoryProducts+"."+id+", "+
                 TableHistoryProducts+"."+ProductName+", "+
                 TableHistoryProducts+"."+Amount+" AS "+Quantity+" FROM "+
-                TableHistoryProducts;
+                TableHistoryProducts+" WHERE "+TableHistoryProducts+"."+PurchaseOrSold+"='sold'";
         db.execSQL(query);
     }
 }
