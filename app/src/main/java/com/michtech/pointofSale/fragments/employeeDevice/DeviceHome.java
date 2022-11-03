@@ -90,6 +90,8 @@ public class DeviceHome extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), com.michtech.pointofSale.Ui.more.store.AddProducts.class);
+                intent.putExtra("TYPE", "no");
+                intent.putExtra("ID", 0);
                 startActivity(intent);
             }
         });

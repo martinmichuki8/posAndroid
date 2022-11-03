@@ -119,7 +119,8 @@ public class ViewProduct2 extends AppCompatActivity {
         Home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(ViewProduct2.this, DashBoard.class);
+                startActivity(intent);
             }
         });
         new Handler().post(new Runnable() {

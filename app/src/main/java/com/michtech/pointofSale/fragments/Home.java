@@ -32,6 +32,7 @@ import com.michtech.pointofSale.adapter.HistoryAdapter;
 import com.michtech.pointofSale.background.Calculate;
 import com.michtech.pointofSale.database.DatabaseManager;
 import com.michtech.pointofSale.database.DbHelper;
+import com.michtech.pointofSale.functions.Functions;
 import com.michtech.pointofSale.graph.BarGraph;
 import com.michtech.pointofSale.graph.LineGraph;
 import com.michtech.pointofSale.pojo.PojoHistory;

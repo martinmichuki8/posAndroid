@@ -1044,7 +1044,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public int checkEmployees(){
         db = this.getReadableDatabase();
         int a = 0;
-        String query = "SELECT COUNT() FROM "+TableEmployee;
+        String query = "SELECT COUNT(*) FROM "+TableEmployee;
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()){
             a = cursor.getInt(0);
@@ -1054,7 +1054,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public boolean CheckEmployee(String name, String email){
         db = this.getReadableDatabase();
         boolean found = false;
-        String query = "SELECT COUNT() FROM "+TableEmployee+" WHERE "+Name+"='"+name+"' AND "+Email+"='"+email+"'";
+        String query = "SELECT COUNT(*) FROM "+TableEmployee+" WHERE "+Name+"='"+name+"' AND "+Email+"='"+email+"'";
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()){
             if(cursor.getInt(0)>0){
@@ -1863,6 +1863,11 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 TableHistoryProducts+"."+ProductName+", "+
                 TableHistoryProducts+"."+Amount+" AS "+Quantity+" FROM "+
                 TableHistoryProducts+" WHERE "+TableHistoryProducts+"."+PurchaseOrSold+"='sold'";
+        db.execSQL(query);
+    }
+    private void dropTableEmployee(){
+        db = this.getReadableDatabase();
+        String query = "DROP TABLE "+TableEmployee;
         db.execSQL(query);
     }
 }

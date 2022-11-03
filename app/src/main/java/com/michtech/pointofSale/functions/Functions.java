@@ -1,19 +1,28 @@
 package com.michtech.pointofSale.functions;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Environment;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.michtech.pointofSale.database.DatabaseManager;
-import com.michtech.pointofSale.duplicates.DuplicateProductsList;
 import com.michtech.pointofSale.list.ProductList;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.WorkbookUtil;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -145,5 +154,27 @@ public class Functions {
         }
         total = String.valueOf(t);
         return total;
+    }
+    public void writeExternalExcelData(View view){
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet(WorkbookUtil.createSafeSheetName("mysheet"));
+        for (int i=0; i<10; i++){
+            Row row = sheet.createRow(i);
+            Cell cell = row.createCell(0);
+            cell.setCellValue("Hello");
+        }
+        /*
+        File cacheDir = activity.getCacheDir();
+        File file = new File(cacheDir, "data.xlsx");
+        */
+        File sd = Environment.getExternalStorageDirectory();
+        try {
+            OutputStream outputStream = new FileOutputStream(sd.getAbsolutePath()+"/Pos/data.xlsx");
+            workbook.write(outputStream);
+            outputStream.flush();
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
