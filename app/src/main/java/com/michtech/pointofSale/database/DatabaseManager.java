@@ -275,6 +275,16 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
         return n;
     }
+    public int getProductPrice(int Id){
+        db = this.getReadableDatabase();
+        String query = "SELECT "+PurchasePrice+" FROM "+TablePrice+" WHERE "+id+"="+Id;
+        Cursor cursor = db.rawQuery(query, null);
+        int price = 0;
+        if(cursor.moveToFirst()){
+            price = cursor.getInt(0);
+        }
+        return price;
+    }
     public void AddPrice(int purchasePrice, int sellingPrice){
         db = this.getReadableDatabase();
         ContentValues values = new ContentValues();

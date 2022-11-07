@@ -133,6 +133,10 @@
         <activity android:name=".Ui.more.store.trend.ProductTrend"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTop"/>
+        <activity android:name=".Ui.store.Pricing"
+            android:launchMode="singleTop">
+
+        </activity>
     </application>
 
 </manifest>

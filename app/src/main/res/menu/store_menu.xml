@@ -6,6 +6,10 @@
     <item
         android:id="@+id/categories"
         android:title="Categories"/>
+
+    <item
+        android:id="@+id/productsPricing"
+        android:title="Pricing and products"/>
     <item
         android:id="@+id/recycle_bin"
         android:title="Recycle Bin"/>

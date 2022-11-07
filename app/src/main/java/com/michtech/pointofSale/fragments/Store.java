@@ -30,6 +30,7 @@ import com.google.zxing.integration.android.IntentResult;
 import com.michtech.pointofSale.R;
 import com.michtech.pointofSale.Ui.ViewProduct2;
 import com.michtech.pointofSale.Ui.more.store.AddProducts;
+import com.michtech.pointofSale.Ui.store.Pricing;
 import com.michtech.pointofSale.activityPortrait.CaptureActivityPortrait;
 import com.michtech.pointofSale.adapter.ProductsAdapter;
 import com.michtech.pointofSale.database.DatabaseManager;
@@ -160,6 +161,10 @@ public class Store extends Fragment {
                                 break;
                             case R.id.categories:
                                 categories();
+                                break;
+                            case R.id.productsPricing:
+                                Intent intent = new Intent(getContext(), Pricing.class);
+                                startActivity(intent);
                                 break;
                             case R.id.recycle_bin:
                                 RecycleBin();

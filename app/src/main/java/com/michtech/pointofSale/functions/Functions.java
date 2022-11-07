@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 
 import com.michtech.pointofSale.database.DatabaseManager;
 import com.michtech.pointofSale.list.ProductList;
+import com.michtech.pointofSale.pojo.PojoPricing;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -23,6 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.time.format.DecimalStyle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,6 +41,7 @@ public class Functions {
 
     public Functions(Activity activity){
         this.activity = activity;
+        db = new DatabaseManager(activity);
     }
 
     public boolean checkMerge(){
@@ -158,10 +161,23 @@ public class Functions {
     public void writeExternalExcelData(View view){
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet(WorkbookUtil.createSafeSheetName("mysheet"));
-        for (int i=0; i<10; i++){
-            Row row = sheet.createRow(i);
-            Cell cell = row.createCell(0);
-            cell.setCellValue("Hello");
+        Row row = sheet.createRow(0);
+        Cell cell = row.createCell(0);
+        cell.setCellValue("Product");
+        Cell cell1 = row.createCell(1);
+        cell1.setCellValue("Description");
+        Cell cell2 = row.createCell(2);
+        cell2.setCellValue("Price");
+        int i=1;
+        for (PojoPricing pojoPricing: getPrices()){
+            Row row1 = sheet.createRow(i);
+            Cell cell3 = row1.createCell(0);
+            cell3.setCellValue(pojoPricing.getProductName());
+            Cell cell4 = row1.createCell(1);
+            cell4.setCellValue(pojoPricing.getDescription());
+            Cell cell5 = row1.createCell(2);
+            cell5.setCellValue(pojoPricing.getPrice());
+            i++;
         }
         /*
         File cacheDir = activity.getCacheDir();
@@ -169,12 +185,49 @@ public class Functions {
         */
         File sd = Environment.getExternalStorageDirectory();
         try {
-            OutputStream outputStream = new FileOutputStream(sd.getAbsolutePath()+"/Pos/data.xlsx");
+            OutputStream outputStream = new FileOutputStream(sd.getAbsolutePath()+"/Pos/ProductsPricing.xlsx");
             workbook.write(outputStream);
             outputStream.flush();
             outputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    public List<PricingData> createPricingList(){
+        List<PricingData> pricingDataList = new ArrayList<>();
+        List<String> Products = db.getAllProductsName().stream().sorted().distinct().collect(Collectors.toList());
+        for(String product: Products){
+            pricingDataList.add(new PricingData(product, db.getAllProductDescriptions(product).stream().distinct().collect(Collectors.toList())));
+        }
+        return pricingDataList;
+    }
+    public List<PojoPricing> getPrices(){
+        List<PojoPricing> pojoPricingList = new ArrayList<>();
+        for(PricingData pricingData: createPricingList()){
+            for(String description: pricingData.getDescription()){
+                pojoPricingList.add(new PojoPricing(pricingData.getProduct(), description, db.getProductPrice(db.getProductId(pricingData.getProduct(), description))));
+            }
+        }
+        return pojoPricingList;
+    }
+    public static class PricingData{
+        String Product;
+        List<String> Description;
+        public PricingData(String Product, List<String> Description){
+            this.Product = Product;
+            this.Description = Description;
+        }
+        public String getProduct(){
+            return Product;
+        }
+        public void setProduct(String Product){
+            this.Product = Product;
+        }
+        public List<String> getDescription(){
+            return Description;
+        }
+        public void setDescription(List<String> Description){
+            this.Description = Description;
         }
     }
 }
