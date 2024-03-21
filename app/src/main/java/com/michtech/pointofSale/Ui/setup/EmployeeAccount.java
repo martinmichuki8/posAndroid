@@ -47,19 +47,16 @@ public class EmployeeAccount extends AppCompatActivity {
 
         SCanQrCode = findViewById(R.id.Scan);
 
-        SCanQrCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                IntentIntegrator intentIntegrator = new IntentIntegrator(EmployeeAccount.this);
-                intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-                intentIntegrator.setPrompt("Scan barcode");
-                intentIntegrator.setCameraId(0);
-                intentIntegrator.setBeepEnabled(true);
-                intentIntegrator.setBarcodeImageEnabled(true);
-                intentIntegrator.setOrientationLocked(true);
-                intentIntegrator.setCaptureActivity(CaptureActivityPortrait.class);
-                intentIntegrator.initiateScan();
-            }
+        SCanQrCode.setOnClickListener(view -> {
+            IntentIntegrator intentIntegrator = new IntentIntegrator(EmployeeAccount.this);
+            intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
+            intentIntegrator.setPrompt("Scan barcode");
+            intentIntegrator.setCameraId(0);
+            intentIntegrator.setBeepEnabled(true);
+            intentIntegrator.setBarcodeImageEnabled(true);
+            intentIntegrator.setOrientationLocked(true);
+            intentIntegrator.setCaptureActivity(CaptureActivityPortrait.class);
+            intentIntegrator.initiateScan();
         });
     }
     @Override

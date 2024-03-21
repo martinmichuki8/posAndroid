@@ -15,7 +15,6 @@ import com.michtech.pointofSale.database.DbHelper;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -48,21 +47,15 @@ public class ViewProduct extends AppCompatActivity {
 
         getProductDetails(id);
 
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                ProductImage.setImageBitmap(convertByteToImage(db.getProductHistoryImage(id)));
-            }
-        });
+        new Handler().post(() -> ProductImage.setImageBitmap(convertByteToImage(db.getProductHistoryImage(id))));
     }
     private Bitmap convertByteToImage(byte[] b){
         InputStream inputStream = new ByteArrayInputStream(b);
-        Bitmap bmp = BitmapFactory.decodeStream(inputStream);
-        return bmp;
+        return BitmapFactory.decodeStream(inputStream);
     }
     @SuppressLint("SetTextI18n")
     private void getProductDetails(int id){
-        List<DbHelper> dbHelperList = new ArrayList<>();
+        List<DbHelper> dbHelperList;
         dbHelperList = db.getSpecificProductFromHistory(id);
         for(DbHelper helper: dbHelperList){
             ProductName.setText(helper.getProductsName());

@@ -32,13 +32,9 @@ public class SelectAccountType extends AppCompatActivity {
             @SuppressLint("NonConstantResourceId")
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                switch (i){
-                    case R.id.admin:
-                        selected = "admin";
-                        break;
-                    case R.id.employee:
-                        selected = "employee";
-                        break;
+                switch (i) {
+                    case R.id.admin -> selected = "admin";
+                    case R.id.employee -> selected = "employee";
                 }
             }
         });

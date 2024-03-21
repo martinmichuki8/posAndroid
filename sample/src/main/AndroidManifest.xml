@@ -15,7 +15,7 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
-    package="com.scrounger.countrycurrencypicker.sample">
+    >
 
     <application
         android:allowBackup="true"

@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
@@ -13,14 +14,12 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.michtech.pointofSale.MainActivity;
 import com.michtech.pointofSale.R;
 import com.michtech.pointofSale.adapter.DashboardAdapter;
 import com.michtech.pointofSale.database.DatabaseManager;
 import com.michtech.pointofSale.fragments.Store;
 import com.michtech.pointofSale.functions.Functions;
 
-import java.util.List;
 import java.util.Objects;
 
 public class DashBoard extends AppCompatActivity implements Store.Listener{
@@ -34,7 +33,6 @@ public class DashBoard extends AppCompatActivity implements Store.Listener{
             R.drawable.more
     };
     Functions functions;
-    private  int STORAGE_PERMISSION_CODE = 1;
     private String ListType = "Products";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,27 +66,27 @@ public class DashBoard extends AppCompatActivity implements Store.Listener{
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             }else{
                 String code = result.getContents();
-                switch(ListType){
-                    case "Products":
-                        if(db.checkProductFromCode(code)){
+                switch (ListType) {
+                    case "Products" -> {
+                        if (db.checkProductFromCode(code)) {
                             Intent intent = new Intent(this, ViewProduct2.class);
                             intent.putExtra("ID", db.getProductsIdFromCode(code));
                             intent.putExtra("LIST_TYPE", ListType);
                             startActivity(intent);
-                        }else{
+                        } else {
                             Toast.makeText(this, "Product not found", Toast.LENGTH_LONG).show();
                         }
-                        break;
-                    case "RecycleBin":
-                        if(db.checkRemovedProductFromCode(code)){
+                    }
+                    case "RecycleBin" -> {
+                        if (db.checkRemovedProductFromCode(code)) {
                             Intent intent = new Intent(this, ViewProduct2.class);
                             intent.putExtra("ID", db.getProductsIdFromCode(code));
                             intent.putExtra("LIST_TYPE", ListType);
                             startActivity(intent);
-                        }else{
+                        } else {
                             Toast.makeText(this, "Product not found", Toast.LENGTH_LONG).show();
                         }
-                        break;
+                    }
                 }
             }
         }
@@ -100,8 +98,9 @@ public class DashBoard extends AppCompatActivity implements Store.Listener{
         ListType = s;
     }
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        int STORAGE_PERMISSION_CODE = 1;
         if (requestCode == STORAGE_PERMISSION_CODE) {
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

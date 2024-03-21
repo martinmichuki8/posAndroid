@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -90,18 +89,11 @@ public class ViewProduct2 extends AppCompatActivity {
         Home = findViewById(R.id.home);
 
         setData();
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                showExpiryDate();
-                switch (listType){
-                    case "Products":
-                        showList();
-                        break;
-                    case "RecycleBin":
-                        showRecycleBinList();
-                        break;
-                }
+        new Handler().post(() -> {
+            showExpiryDate();
+            switch (listType) {
+                case "Products" -> showList();
+                case "RecycleBin" -> showRecycleBinList();
             }
         });
 
@@ -116,85 +108,67 @@ public class ViewProduct2 extends AppCompatActivity {
             Objects.requireNonNull(ExpiryDate.getEditText()).setText(date);
         };
 
-        Home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ViewProduct2.this, DashBoard.class);
-                startActivity(intent);
-            }
+        Home.setOnClickListener(view -> {
+            Intent intent = new Intent(ViewProduct2.this, DashBoard.class);
+            startActivity(intent);
         });
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                switch (listType){
-                    case "Products":
-                        ProductImage.setImageBitmap(convertByteToImage(db.getProductImage(id)));
-                        break;
-                    case "RecycleBin":
-                        ProductImage.setImageBitmap(convertByteToImage(db.getProductImageRecycleBin(id)));
-                        break;
-                }
+        new Handler().post(() -> {
+            switch (listType){
+                case "Products":
+                    ProductImage.setImageBitmap(convertByteToImage(db.getProductImage(id)));
+                    break;
+                case "RecycleBin":
+                    ProductImage.setImageBitmap(convertByteToImage(db.getProductImageRecycleBin(id)));
+                    break;
             }
         });
 
-        ProductMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(getApplicationContext(), ProductMenu);
-                switch (listType){
-                    case "Products":
-                        popupMenu.inflate(R.menu.product_menu);
-                        break;
-                    case "RecycleBin":
-                        popupMenu.inflate(R.menu.recycle_bin_menu);
-                        break;
-                }
-                popupMenu.show();
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @SuppressLint("NonConstantResourceId")
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        switch (menuItem.getItemId()){
-                            case R.id.edit:
-                                Intent intent = new Intent(ViewProduct2.this, AddProducts.class);
-                                intent.putExtra("TYPE", "Update");
-                                intent.putExtra("ID", id);
-                                startActivity(intent);
-                                break;
-                            case R.id.changeAmount:
-                                setChangeAmountDialog();
-                                break;
-                            case R.id.delete:
-                                new ConfirmDelete(id).show(getSupportFragmentManager(), "DeleteProduct");
-                                break;
-                            case R.id.expiry:
-                                setExpiryDateDialog();
-                                break;
-                            case R.id.restore:
-                                restoreProducts();
-                                finish();
-                                break;
-                            case R.id.deleteComplete:
-                                db.deleteFromRecycleBin(id);
-                                finish();
-                                break;
-                        }
-                        return false;
-                    }
-                });
+        ProductMenu.setOnClickListener(view -> {
+            PopupMenu popupMenu = new PopupMenu(getApplicationContext(), ProductMenu);
+            switch (listType){
+                case "Products":
+                    popupMenu.inflate(R.menu.product_menu);
+                    break;
+                case "RecycleBin":
+                    popupMenu.inflate(R.menu.recycle_bin_menu);
+                    break;
             }
+            popupMenu.show();
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @SuppressLint("NonConstantResourceId")
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    switch (menuItem.getItemId()) {
+                        case R.id.edit -> {
+                            Intent intent = new Intent(ViewProduct2.this, AddProducts.class);
+                            intent.putExtra("TYPE", "Update");
+                            intent.putExtra("ID", id);
+                            startActivity(intent);
+                        }
+                        case R.id.changeAmount -> setChangeAmountDialog();
+                        case R.id.delete ->
+                                new ConfirmDelete(id).show(getSupportFragmentManager(), "DeleteProduct");
+                        case R.id.expiry -> setExpiryDateDialog();
+                        case R.id.restore -> {
+                            restoreProducts();
+                            finish();
+                        }
+                        case R.id.deleteComplete -> {
+                            db.deleteFromRecycleBin(id);
+                            finish();
+                        }
+                    }
+                    return false;
+                }
+            });
         });
     }
     @SuppressLint("SetTextI18n")
     private void setData(){
         list = new ArrayList<>();
-        switch (listType){
-            case "Products":
-                list = db.getSpecificProducts(id);
-                break;
-            case "RecycleBin":
-                list = db.getSpecificProductFromRecycleBin(id);
-                break;
+        switch (listType) {
+            case "Products" -> list = db.getSpecificProducts(id);
+            case "RecycleBin" -> list = db.getSpecificProductFromRecycleBin(id);
         }
         for(ProductList productList: list){
             Category.setText(productList.getCategory());
@@ -347,8 +321,7 @@ public class ViewProduct2 extends AppCompatActivity {
     @NonNull
     private String getDate() {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String currentDateTime = sdf.format(new Date());
-        return currentDateTime;
+        return sdf.format(new Date());
     }
     @SuppressLint("SetTextI18n")
     private void showExpiryDate(){

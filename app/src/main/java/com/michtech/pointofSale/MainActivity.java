@@ -9,6 +9,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.michtech.pointofSale.Ui.DashBoard;
 import com.michtech.pointofSale.Ui.Login.Login;
@@ -37,43 +39,29 @@ public class MainActivity extends AppCompatActivity {
 
     public void onResume() {
         super.onResume();
-        switch(getThemeSetting()){
-            case "Light":
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                break;
-            case "Dark":
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                break;
-            case "System":
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-                break;
+        switch (getThemeSetting()) {
+            case "Light" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            case "Dark" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            case "System" ->
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         }
-        CountDownTimer timer = new CountDownTimer(1000, 1000) {
-            @Override
-            public void onTick(long l) {
+        new Handler(Looper.getMainLooper()).postDelayed(() ->{
+            db.CheckTables();
 
-            }
-
-            @Override
-            public void onFinish() {
-
-                db.CheckTables();
-
-                Intent intent = null;
-                if (db.checkTableStore() && db.checkTableUser()) {
-                    if(checkAuthentication()){
-                        intent = new Intent(MainActivity.this, Login.class);
-                    }else{
-                        intent = new Intent(MainActivity.this, DashBoard.class);
-                    }
-                } else {
-                    intent = new Intent(MainActivity.this, SelectAccountType.class);
+            Intent intent = null;
+            if (db.checkTableStore() && db.checkTableUser()) {
+                if(checkAuthentication()){
+                    intent = new Intent(MainActivity.this, Login.class);
+                }else{
+                    intent = new Intent(MainActivity.this, DashBoard.class);
                 }
-                startActivity(intent);
-                finish();
-                //StoreDatabase();
+            } else {
+                intent = new Intent(MainActivity.this, SelectAccountType.class);
             }
-        }.start();
+            startActivity(intent);
+            finish();
+            //StoreDatabase();
+        }, 2000);
     }
 
     private String getThemeSetting(){
